@@ -1,5 +1,4 @@
 import { Prisma } from "@prisma/client";
-
 import ProductItem from "./product-item";
 
 interface ProdcutListProps {
