@@ -3,7 +3,7 @@
 import { SearchIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Search = () => {
@@ -14,7 +14,9 @@ const Search = () => {
     setSearch(e.target.value);
   };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
     if (!search) {
       return;
     }
@@ -22,17 +24,17 @@ const Search = () => {
   };
   return (
     <>
-      <div className="flex gap-2">
+      <form className="flex gap-2" onSubmit={handleSearchSubmit}>
         <Input
           placeholder="Buscar restaurantes"
           className="border-none"
           onChange={handleChange}
           value={search}
         />
-        <Button size="icon" onClick={handleSearchSubmit}>
+        <Button size="icon" type="submit">
           <SearchIcon size={20} />
         </Button>
-      </div>
+      </form>
     </>
   );
 };
